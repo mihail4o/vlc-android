@@ -6,11 +6,17 @@ ARCH=$(APP_ABI)
 LOCAL_SRC_FILES += libvlcjni-modules.c libvlcjni-symbols.c dummy.cpp
 LOCAL_LDLIBS := \
 	-L$(VLC_CONTRIB)/lib \
-	$(VLC_MODULES) \
+
+include $(INC_VLC_MODULES)
+
+LOCAL_LDLIBS += \
 	$(VLC_BUILD_DIR)/lib/.libs/libvlc.a \
 	$(VLC_BUILD_DIR)/src/.libs/libvlccore.a \
 	$(VLC_BUILD_DIR)/compat/.libs/libcompat.a \
-	$(VLC_CONTRIB_LDFLAGS) \
+
+include $(INC_VLC_CONTRIB_LDFLAGS)
+
+LOCAL_LDLIBS += \
 	-ldl -lz -lm -llog \
 	-lliveMedia -lUsageEnvironment -lBasicUsageEnvironment -lgroupsock \
 	-la52 -ljpeg \
